@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-MAINTAINER Thom Nichols "ardsjj@gmail.com"
+MAINTAINER Amauri Rodrigues "ardsjj@gmail.com"
 
 RUN apt-get update
 RUN apt-get -qq update
