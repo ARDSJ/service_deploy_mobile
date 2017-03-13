@@ -13,9 +13,6 @@ module.exports = function(app, config) {
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env == 'development';
   
-  app.set('views', config.root + '/app/views');
-  app.set('view engine', 'jade');
-
   // app.use(favicon(config.root + '/public/img/favicon.ico'));
   app.use(logger('dev'));
   app.use(bodyParser.json());
@@ -41,7 +38,7 @@ module.exports = function(app, config) {
   if(app.get('env') === 'development'){
     app.use(function (err, req, res, next) {
       res.status(err.status || 500);
-      res.render('error', {
+      res.json({
         message: err.message,
         error: err,
         title: 'error'
@@ -51,7 +48,7 @@ module.exports = function(app, config) {
 
   app.use(function (err, req, res, next) {
     res.status(err.status || 500);
-      res.render('error', {
+      res.json({
         message: err.message,
         error: {},
         title: 'error'
