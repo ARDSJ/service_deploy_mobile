@@ -1,0 +1,10 @@
+version: '2'
+services:
+
+  service_deploy_mobile:
+    build: .
+    privileged: true
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./src:/usr/src/app
