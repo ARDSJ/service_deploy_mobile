@@ -2,12 +2,8 @@ var express = require('express'),
   router = express.Router(),
   Promise = require('bluebird')
   adb = require('adbkit')
-  client = adb.createClient([{
-    port:5037,
-    host:"localhost"
-  }])
-  apk = 'vendor/app.apk'
-  Article = require('../models/article');
+  client = adb.createClient()
+  apk = 'vendor/app.apk';
 
 module.exports = function (app) {
   app.use('/', router);
@@ -16,24 +12,20 @@ module.exports = function (app) {
 router.get('/', function (req, res, next) {
   var articles = [new Article(), new Article()];
     res.render('index', {
-      title: 'Generator-Express MVC',
+      title: 'Teste deploy',
       articles: articles
     });
 
   client.listDevices()
     .then(function(devices) {
       return Promise.map(devices, function(device) {
+        console.log(devices)
         return client.install(device.id, apk)
       })
     })
     .then(function() {
-      console.log('Installed %s on all connected devices', apk)
     })
     .catch(function(err) {
-      console.error('Something went wrong:', err.stack)
     })
-
-
-
 
 });

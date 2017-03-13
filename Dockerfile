@@ -8,9 +8,11 @@ RUN apt-get install -y usbutils
 RUN apt-get install -y android-tools-adb android-tools-fastboot
 RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
 
-VOLUME ["/usr/src/app"]
+#VOLUME ["/usr/src/app"]
 
-ADD ./src /usr/src/app
+VOLUME  ./src /usr/src/app
+
+#ADD ./src /usr/src/app
 RUN cd /usr/src/app && npm install
 
 EXPOSE 8888
